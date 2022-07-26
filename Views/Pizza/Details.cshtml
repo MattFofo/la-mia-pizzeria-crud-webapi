@@ -5,29 +5,32 @@
 @model Pizza
 
 
-<div class="container py-5">
+<div class="container py-5 d-flex justify-content-center h-main-body">
 
     <div class="card-pizza-details position-relative">
         <img src=@Model.Image class="card-img img-card-details" onerror="this.src ='https://picsum.photos/400'" alt=@Model.Name>
         <div class="card-img-overlay">
-            <h5 class="card-title fs-1">@Model.Name</h5>
-            <div class="badge bg-info text-dark">@Model.Category.Name</div>
-            @foreach (Ingredient ingr in Model.Ingredients)
-            {
-                <span class="badge bg-warning text-dark">@ingr.Name</span>
-            }
-            <p class="card-text fs-3">@Model.Description</p>
-            <p class="card-text fs-3">@Model.Price &euro;</p>
-            <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@Model.Id">
-                <i class="fa-solid fa-pencil"></i>
-            </a>
-            @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
-            {
-                <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@Model.Id ">
-                    <i class="fa-solid fa-trash-can-arrow-up"></i>
-                </button>
-            }
-            <a class="btn btn-primary" asp-controller="Pizza" asp-action="Index">Torna alla lista</a>
+            <div class="contrast-text translated-inner-card">
+
+                <h5 class="card-title fs-1 contrast-text text-center">@Model.Name</h5>
+                <div class="badge bg-info text-dark">@Model.Category.Name</div>
+                @foreach (Ingredient ingr in Model.Ingredients)
+                {
+                    <span class="badge bg-warning text-dark">@ingr.Name</span>
+                }
+                <p class="card-text fs-3">@Model.Description</p>
+                <p class="card-text fs-3">@Model.Price &euro;</p>
+                <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@Model.Id">
+                    <i class="fa-solid fa-pencil"></i>
+                </a>
+                @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                {
+                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@Model.Id ">
+                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                    </button>
+                }
+                <a class="btn btn-primary" asp-controller="Pizza" asp-action="Index">Torna alla lista</a>
+            </div>
         </div>
     </div>
 </div>

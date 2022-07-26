@@ -30,6 +30,11 @@ html {
     height: 500px;
 }
 
+.contrast-text {
+    background-color: rgb(0 0 0 / 42%); 
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+}
 
 /* main layout */
 
@@ -50,27 +55,47 @@ html {
 
 /* cards */
 
-.card-pizza-list, .card-pizza-details, .table-pizza-list {
+.card-pizza-list, .table-pizza-list {
     box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
     border-radius: 12px;
 }
 
 .card-pizza-list {
     min-height: 200px;
+    margin: 1rem;
+    width: calc(33% - 2rem);
 }
 
 .card-pizza-details {
     max-width: 500px;
+    min-width: 350px;
 }
 
+.card-popular-section{
+    margin: 1rem;
+    width: calc(50% - 2rem);
+}
+
+.img-card-detail {
+    box-shadow: -4px -3px 45px 21px rgb(0 0 0 / 35%);
+    border-radius: 50px;
+}
 
 .table-pizza-list {
     background-color: ghostwhite;
 }
 
 
-/* Form */
+.translated-inner-card {
+    padding: 2rem;
+    position: absolute;
+    left: 250px;
+    top: 50px;
+    width: 450px;
+    color: white;
+}
 
+/* Form */
 .form-create, form-edit {
     background-color: lightblue;
     box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
