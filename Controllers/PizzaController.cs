@@ -179,7 +179,7 @@ namespace la_mia_pizzeria.Controllers
                     }
                 }
 
-                //context.Update(pizzaToEdit);
+                context.Update(pizzaToEdit);
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
