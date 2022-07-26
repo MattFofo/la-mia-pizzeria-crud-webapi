@@ -31,6 +31,7 @@ html {
 }
 
 .contrast-text {
+    color: white;
     background-color: rgb(0 0 0 / 42%); 
     border-radius: 10px;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
@@ -79,6 +80,8 @@ html {
 .img-card-detail {
     box-shadow: -4px -3px 45px 21px rgb(0 0 0 / 35%);
     border-radius: 50px;
+    min-width: 500px;
+    min-height: 340px;
 }
 
 .table-pizza-list {
