@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria.Controllers
 {
-    [Authorize]
+    
     public class PizzaController : Controller
     {
         // GET: PizzasController
@@ -35,7 +35,7 @@ namespace la_mia_pizzeria.Controllers
             }
         }
 
-        // GET: PizzasController/Create
+        [Authorize]
         public ActionResult Create()
         {
             using (PizzeriaContext context = new PizzeriaContext())
@@ -56,7 +56,7 @@ namespace la_mia_pizzeria.Controllers
         }
 
 
-        // POST: PizzasController/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PizzaPivotCrud formData)
@@ -104,7 +104,7 @@ namespace la_mia_pizzeria.Controllers
             }
         }
 
-        // GET: PizzasController/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             using (PizzeriaContext context = new PizzeriaContext())
@@ -134,7 +134,7 @@ namespace la_mia_pizzeria.Controllers
 
         }
 
-        // POST: PizzasController/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, PizzaPivotCrud model)
@@ -186,7 +186,7 @@ namespace la_mia_pizzeria.Controllers
             }
         }
 
-        // POST: PizzasController/Delete/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
