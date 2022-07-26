@@ -28,15 +28,29 @@
                             <a class="btn btn-info" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
-                            <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
+                            @if (User.Identity.IsAuthenticated)
+                            {                                
+                                <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
                             
-                            @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                                @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                                {
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
+                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                    </button>
+                                }
+                            }
+                            else
                             {
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
-                                    <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                </button>
+                                @if (pizza.Ingredients != null)
+                                {
+                                    foreach (Ingredient ingredient in pizza.Ingredients)
+                                    {
+                                        <span class="badge bg-warning">@ingredient.Name</span>
+                                    }
+                                        
+                                }
                             }
                         </div>
                     </div>

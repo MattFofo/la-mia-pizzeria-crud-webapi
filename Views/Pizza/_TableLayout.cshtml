@@ -8,7 +8,12 @@
             <td>Descrizione</td>
             <td>Prezzo</td>
             <td>Categoria</td>
-            <td>Azioni</td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>Azioni</td>                
+            }else{
+                <td>Ingredienti</td>
+            }
         </tr>
     </thead>
     @{
@@ -26,27 +31,43 @@
                         <td><a asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">@pizza.Name</a></td>
                         <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" onerror="this.src ='https://picsum.photos/200'"/></td>
                         <td>@pizza.Description</td>
-                        <td>@pizza.Price &euro;</td>
+                        <td style="width: 100px;">@pizza.Price &euro;</td>
                         <td><span class="badge bg-info text-dark">@pizza.Category.Name</span></td>
-                        <td>
-                            <div class="d-flex flex-nowrap gx-2">
-                                <a class="btn btn-info me-1" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
 
-                                <a class="btn btn-warning me-1" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
-                                    <i class="fa-solid fa-pencil"></i>
-                                </a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <td>
+                                <div class="d-flex flex-nowrap gx-2">
+                                    <a class="btn btn-info me-1" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+
+                                    <a class="btn btn-warning me-1" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
                             
-                                @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
-                                {
-                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
-                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
-                                    </button>
-                                }
-                            </div>
-                        </td>
-                    </tr>
+                                    @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                                    {
+                                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
+                                            <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                        </button>
+                                    }
+                                </div>
+                                </td>
+                            }else
+                            {
+                                <td>
+                                    @if (pizza.Ingredients != null)
+                                    {
+                                        foreach (Ingredient ingredient in pizza.Ingredients)
+                                        {
+                                            <span class="badge bg-warning">@ingredient.Name</span>
+                                        }
+                                        
+                                    }
+                                </td>
+                            }
+                        </tr>
                 }
             }
             </tbody>  

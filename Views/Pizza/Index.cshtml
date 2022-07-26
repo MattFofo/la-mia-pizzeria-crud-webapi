@@ -9,7 +9,10 @@
         </div>
         <div class="py-3">
             <button class="btn btn-primary" id="change-table-cards-view"><i class="fa-regular fa-id-card"></i></button>
-            <a class="btn btn-primary" asp-controller="Pizza" asp-action="Create"><i class="fa-solid fa-plus"></i></a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-primary" asp-controller="Pizza" asp-action="Create"><i class="fa-solid fa-plus"></i></a>            
+            }
         </div>
 
         <div class="table-pizza-list" id="table-layout">
