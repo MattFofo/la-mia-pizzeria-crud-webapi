@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria.DataBase;
 using la_mia_pizzeria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria.Controllers
 {
+    [Authorize]
     public class PizzaController : Controller
     {
         // GET: PizzasController

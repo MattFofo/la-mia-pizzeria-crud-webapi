@@ -17,5 +17,15 @@ namespace la_mia_pizzeria.DataBase
         {
             optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=db-pizzeria;Integrated Security=True");
         }
+
+        public PizzeriaContext()
+        {
+
+        }
+
+        public PizzeriaContext(DbContextOptions<PizzeriaContext> options) : base(options)
+        {
+
+        }
     }
 }
