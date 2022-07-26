@@ -20,14 +20,18 @@
                 }
                 <p class="card-text fs-3">@Model.Description</p>
                 <p class="card-text fs-3">@Model.Price &euro;</p>
-                <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@Model.Id">
-                    <i class="fa-solid fa-pencil"></i>
-                </a>
-                @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+
+                @if (User.Identity.IsAuthenticated)
                 {
-                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@Model.Id ">
-                        <i class="fa-solid fa-trash-can-arrow-up"></i>
-                    </button>
+                    <a class="btn btn-warning" asp-controller="Pizza" asp-action="Edit" asp-route-id="@Model.Id">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
+                    @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                    {
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@Model.Id ">
+                            <i class="fa-solid fa-trash-can-arrow-up"></i>
+                        </button>
+                    }
                 }
                 <a class="btn btn-primary" asp-controller="Pizza" asp-action="Index">Torna alla lista</a>
             </div>
