@@ -1,8 +1,8 @@
 ﻿@model List<Pizza>
 
 
-<div class="container">
-    <div class="row g-3">
+<div class="container" id="jsContainer">
+    @*<div class="row g-3">
         <div class="col">
             <h1>Le più popolari</h1>
         </div>
@@ -30,6 +30,32 @@
                 }
             }
         </div>
-    </div>
+    </div>*@
 
 </div>
+
+<script type="text/javascript">
+
+    const jsCont = document.getElementById("jsContainer");
+    let pizzas = [];
+    axios.get("/api/pizzas").then(res => {
+        //res.data.forEach(pizza => {
+        //    console.log("pizza " + pizza);
+        //})
+        pizzas = res.data;
+        console.log(pizzas);
+        console.log("ok" + res.data);
+
+    }).catch(err => {
+
+        console.log("failed" + err);
+    })
+
+ 
+
+    jsCont.innerHTML = `<h1>CIAO<h1>`;
+
+
+
+
+</script>
