@@ -1,0 +1,55 @@
+﻿@model List<Pizza>
+
+<table class="table caption-top">
+    <thead>
+        <tr>
+            <td>Nome</td>
+            <td>Immagine</td>
+            <td>Descrizione</td>
+            <td>Prezzo</td>
+            <td>Categoria</td>
+            <td>Azioni</td>
+        </tr>
+    </thead>
+    @{
+        if (Model.Count() == 0)
+        {
+            <h1>Non è stata inserita nessuna Pizza!</h1>
+
+        } else
+        {
+            <tbody>
+            @{
+                foreach (var pizza in Model)
+                {
+                    <tr class="py-2">
+                        <td><a asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">@pizza.Name</a></td>
+                        <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" onerror="this.src ='https://picsum.photos/200'"/></td>
+                        <td>@pizza.Description</td>
+                        <td>@pizza.Price &euro;</td>
+                        <td><span class="badge bg-info text-dark">@pizza.Category.Name</span></td>
+                        <td>
+                            <div class="d-flex flex-nowrap gx-2">
+                                <a class="btn btn-info me-1" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+
+                                <a class="btn btn-warning me-1" asp-controller="Pizza" asp-action="Edit" asp-route-id="@pizza.Id">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
+                            
+                                @using (Html.BeginForm(FormMethod.Post, new { @class = "d-inline-block" })) 
+                                {
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id ">
+                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                    </button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>  
+        }
+    }
+</table>

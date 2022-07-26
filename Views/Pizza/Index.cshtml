@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Lista Pizze";
+}
+
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-4">
+            <h1>Ecco le nostre Pizze</h1>
+        </div>
+        <div class="py-3">
+            <button class="btn btn-primary" id="change-table-cards-view"><i class="fa-regular fa-id-card"></i></button>
+            <a class="btn btn-primary" asp-controller="Pizza" asp-action="Create"><i class="fa-solid fa-plus"></i></a>
+        </div>
+
+        <div class="table-pizza-list" id="table-layout">
+            <div class="container">
+                @Html.Partial("_TableLayout")
+            </div>
+        </div>
+
+
+        <div class="d-none" id="cards-layout">
+            <div class="row g-3 row-cols-3">
+                @Html.Partial("_CardsLayout")
+            </div>
+        </div>
+    </div>
+</div>

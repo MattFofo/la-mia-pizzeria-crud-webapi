@@ -1,0 +1,35 @@
+﻿@model List<Pizza>
+
+
+<div class="container">
+    <div class="row g-3">
+        <div class="col">
+            <h1>Le più popolari</h1>
+        </div>
+
+        <div class="row g-3 justify-content-center py-4 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
+            @foreach (var pizza in Model)
+            {
+                if (pizza.Name == "Margherita" || pizza.Name == "Capricciosa" || pizza.Name == "Colombo" || pizza.Name == "Inverno")
+                {                   
+                    <div class="card mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <img src="@pizza.Image" class="img-fluid rounded-start" alt="@pizza.Name">
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">@pizza.Name</h5>
+                                    <p class="card-text">@pizza.Description</p>
+                                    <p class="card-text"><small class="text-muted">@pizza.Price &euro;</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id" class="btn btn-primary">Dettagli</a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>

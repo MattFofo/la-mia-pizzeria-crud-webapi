@@ -1,0 +1,88 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/*body {
+  margin-bottom: 60px;
+}*/
+
+/* utilities */
+.top-20 {
+    top: 20px;
+}
+
+.left-20 {
+    left: 20px;
+}
+
+.h-main-body {
+    height: 500px;
+}
+
+
+/* main layout */
+
+.bg-main {
+    background-image: url(https://localhost:7009/images/pizza-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.bg-content {
+    background-image: url(https://localhost:7009/images/img9.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+/* cards */
+
+.card-pizza-list, .card-pizza-details, .table-pizza-list {
+    box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
+    border-radius: 12px;
+}
+
+.card-pizza-list {
+    min-height: 200px;
+}
+
+.card-pizza-details {
+    max-width: 500px;
+}
+
+
+.table-pizza-list {
+    background-color: ghostwhite;
+}
+
+
+/* Form */
+
+.form-create, form-edit {
+    background-color: lightblue;
+    box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
+    border-radius: 20px;
+}
+
+
+/* footer */
+
+.footer-social-links-container > a {
+    text-decoration: none;
+}
+
+
+/* buttons */
