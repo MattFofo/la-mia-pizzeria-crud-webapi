@@ -1,37 +1,11 @@
 ﻿@model List<Pizza>
 
 
-<div class="container" id="jsContainer">
-    @*<div class="row g-3">
-        <div class="col">
-            <h1>Le più popolari</h1>
-        </div>
+<div class="container" >
+        <div class="row g-3 justify-content-center py-4 row-cols-lg-2 row-cols-md-2 row-cols-sm-1" id="jsContainer">
 
-        <div class="row g-3 justify-content-center py-4 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
-            @foreach (var pizza in Model)
-            {
-                if (pizza.Name == "Margherita" || pizza.Name == "Capricciosa" || pizza.Name == "Colombo" || pizza.Name == "Inverno")
-                {                   
-                    <div class="card mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <img src="@pizza.Image" class="img-fluid rounded-start" alt="@pizza.Name">
-                            </div>
-                            <div class="col">
-                                <div class="card-body">
-                                    <h5 class="card-title">@pizza.Name</h5>
-                                    <p class="card-text">@pizza.Description</p>
-                                    <p class="card-text"><small class="text-muted">@pizza.Price &euro;</small></p>
-                                </div>
-                            </div>
-                        </div>
-                        <a asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id" class="btn btn-primary">Dettagli</a>
-                    </div>
-                }
-            }
         </div>
-    </div>*@
-
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -39,23 +13,35 @@
     const jsCont = document.getElementById("jsContainer");
     let pizzas = [];
     axios.get("/api/pizzas").then(res => {
-        //res.data.forEach(pizza => {
-        //    console.log("pizza " + pizza);
-        //})
+
         pizzas = res.data;
-        console.log(pizzas);
-        console.log("ok" + res.data);
+
+        pizzas.forEach(pizza => {
+            console.log(pizza);
+            if (pizza.name == "Margherita" || pizza.name == "Capricciosa" || pizza.name == "Colombo" || pizza.name == "Inverno"){
+
+                jsCont.innerHTML += `
+                    <div class="card mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">${pizza.name}</h5>
+                                    <p class="card-text">${pizza.description}</p>
+                                    <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-controller="Pizza" asp-action="Details" asp-route-id="${pizza.id}" class="btn btn-primary">Dettagli</a>
+                    </div>
+                `;
+            }
+        })
 
     }).catch(err => {
 
         console.log("failed" + err);
     })
-
- 
-
-    jsCont.innerHTML = `<h1>CIAO<h1>`;
-
-
-
-
 </script>
