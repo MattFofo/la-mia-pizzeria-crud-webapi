@@ -27,5 +27,19 @@ namespace la_mia_pizzeria.Controllers.Api
             return Ok(pizzasList.ToList());
   
         }
+
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+
+            PizzeriaContext ctx = new PizzeriaContext();
+
+            Pizza pizza = ctx.Pizzas.Find(id);
+
+            if(pizza == null) return NotFound();
+
+            return Ok(pizza);
+
+        }
     }
 }

@@ -24,6 +24,13 @@ namespace la_mia_pizzeria.Controllers
                 return View(listPizzas);
             }
         }
+        public IActionResult Details(int id)
+        {
+            //string id = (string)RouteData.Values["id"];
+            //ViewData["id"] = id;
+            return View(id);
+        }
+
 
         public IActionResult Privacy()
         {
