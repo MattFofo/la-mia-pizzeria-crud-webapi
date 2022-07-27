@@ -1,3 +1,54 @@
 ﻿@model int
 
+<div class="container" id="js_container">
+
+</div>
 <h1>@Model</h1>
+
+
+
+<script type="text/javascript">
+
+    const jsContainer = document.getElementById("js_container");
+
+    axios.get("/api/pizzas/@Model").then(res => {
+        console.log(res.data);
+
+        //let ingredients;
+        //res.data.ingredients.forEach(ingr => {
+
+        //})
+
+
+        jsContainer.innerHTML = `
+
+        
+        <div class="container py-5 d-flex justify-content-center h-main-body">
+
+            <div class="card-pizza-details position-relative">
+                <img src=${res.data.image} class="card-img img-card-details" onerror="this.src ='https://picsum.photos/400'" alt=${res.data.name}>
+                <div class="card-img-overlay">
+                    <div class="contrast-text translated-inner-card">
+
+                        <h5 class="card-title fs-1 contrast-text text-center">${res.data.name}</h5>
+                        <div class="badge bg-info text-dark">${res.data.category.name}</div>
+
+                        <p class="card-text fs-3">${res.data.description}</p>
+                        <p class="card-text fs-3">${res.data.price} &euro;</p>
+
+                        <a class="btn btn-primary" href="Home" asp-controller="Pizza" asp-action="Index">Torna alla lista</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        `
+
+    }).catch(err => {
+        console.log(err);
+
+    })
+
+</script>

@@ -2,6 +2,7 @@
 using la_mia_pizzeria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria.Controllers.Api
 {
@@ -34,7 +35,7 @@ namespace la_mia_pizzeria.Controllers.Api
 
             PizzeriaContext ctx = new PizzeriaContext();
 
-            Pizza pizza = ctx.Pizzas.Find(id);
+            Pizza pizza = ctx.Pizzas.Where(p => p.Id == id).Include("Category").Include("Ingredients").FirstOrDefault();
 
             if(pizza == null) return NotFound();
 
