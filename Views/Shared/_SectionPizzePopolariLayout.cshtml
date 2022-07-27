@@ -2,46 +2,78 @@
 
 
 <div class="container" >
-        <div class="row g-3 justify-content-center py-4 row-cols-lg-2 row-cols-md-2 row-cols-sm-1" id="jsContainer">
-
-        </div>
+    <div id="js_no_pizzas_container" class="d-none">
+        <h2>
+            Non sono state trovate pizze!
+        </h2>    
+    </div>
+    <div class="col">
+        <input id="search_pizza" type="text" class="form-control" placeholder="Ricerca una pizza..." onkeyup="searchPizza" />
+    </div>
+    <div class="row g-3 justify-content-center py-4 row-cols-lg-2 row-cols-md-2 row-cols-sm-1" id="jsContainer">
+        @* elementi js *@
     </div>
 </div>
 
 <script type="text/javascript">
 
     const jsCont = document.getElementById("jsContainer");
-    let pizzas = [];
-    axios.get("/api/pizzas").then(res => {
+    document.getElementById("search_pizza").addEventListener("keyup", searchPizza);
 
-        pizzas = res.data;
+    loadList();
 
-        pizzas.forEach(pizza => {
-            console.log(pizza);
-            if (pizza.name == "Margherita" || pizza.name == "Capricciosa" || pizza.name == "Colombo" || pizza.name == "Inverno"){
+    function searchPizza(event) {
+        const value = document.getElementById("search_pizza").value;
 
-                jsCont.innerHTML += `
-                    <div class="card card-popular-section mb-3">
-                        <div class="row">
-                            <div class="col">
-                                <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
-                            </div>
-                            <div class="col">
-                                <div class="card-body">
-                                    <h5 class="card-title">${pizza.name}</h5>
-                                    <p class="card-text">${pizza.description}</p>
-                                    <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
-                                </div>
-                            </div>
-                        <a href="Pizza/Details/${pizza.id}" class="btn btn-primary w-25">Dettagli</a>
-                        </div>
-                    </div>
-                `;
+        loadList(value);
+    }
+
+
+
+    function loadList(search) {
+
+        axios.get("/api/pizzas", {
+            params: {
+                search:search
             }
+        }).then(res => {
+
+            if (res.data.length == 0) {
+                document.getElementById("js_no_pizzas_container").classList.remove("d-none");
+                document.getElementById("jsContainer").classList.add("d-none");
+
+            } else {
+                document.getElementById("js_no_pizzas_container").classList.add("d-none");
+                document.getElementById("jsContainer").classList.remove("d-none");
+                jsCont.innerHTML = "";
+
+                res.data.forEach(pizza => {
+                
+                    jsCont.innerHTML += `
+                        <div class="card card-popular-section mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${pizza.name}</h5>
+                                        <p class="card-text">${pizza.description}</p>
+                                        <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
+                                    </div>
+                                </div>
+                            <a href="Pizza/Details/${pizza.id}" class="btn btn-primary w-25">Dettagli</a>
+                            </div>
+                        </div>
+                    `;
+                })
+            }
+
+
+        }).catch(err => {
+
+            console.log("failed" + err);
         })
+    }
 
-    }).catch(err => {
-
-        console.log("failed" + err);
-    })
 </script>
