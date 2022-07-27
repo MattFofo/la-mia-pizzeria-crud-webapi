@@ -8,10 +8,11 @@
         </h2>    
     </div>
     <div class="col">
-        <input id="search_pizza" type="text" class="form-control" placeholder="Ricerca una pizza..." onkeyup="searchPizza" />
+        <h2>Lista Pizze</h2>
+        <input id="search_pizza" type="text" class="form-control my-4" placeholder="Ricerca una pizza..." onkeyup="searchPizza" />
     </div>
-    <div class="row g-3 justify-content-center py-4 row-cols-lg-2 row-cols-md-2 row-cols-sm-1" id="jsContainer">
-        @* elementi js *@
+    <div class="">
+        <div id="jsContainer" class="js-container-index-home row g-3 justify-content-center py-4 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">@* elementi js *@</div>
     </div>
 </div>
 
@@ -50,21 +51,23 @@
                 res.data.forEach(pizza => {
                 
                     jsCont.innerHTML += `
-                        <div class="card card-popular-section mb-3">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
-                                </div>
-                                <div class="col">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${pizza.name}</h5>
-                                        <p class="card-text">${pizza.description}</p>
-                                        <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
+                            <div class="card card-popular-section mb-3">
+                            <a href="Home/Details/${pizza.id}" class="text-decoration-none">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${pizza.name}</h5>
+                                            <div class="badge bg-info text-dark">${pizza.category.name}</div>
+                                            <p class="card-text">${pizza.description}</p>
+                                            <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
+                                        </div>
                                     </div>
                                 </div>
-                                <a href="Home/Details/${pizza.id}" class="btn btn-primary w-25">Dettagli</a>
+                            </a>
                             </div>
-                        </div>
                     `;
                 })
             }

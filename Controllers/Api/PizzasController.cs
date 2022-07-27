@@ -16,11 +16,11 @@ namespace la_mia_pizzeria.Controllers.Api
 
             PizzeriaContext ctx = new PizzeriaContext();
 
-            IQueryable<Pizza> pizzasList = ctx.Pizzas;
+            IQueryable<Pizza> pizzasList = ctx.Pizzas.Include("Category");
 
             if(search != null && search != "")
             {
-                pizzasList = ctx.Pizzas.Where(p => p.Name.Contains(search));
+                pizzasList = ctx.Pizzas.Where(p => p.Name.Contains(search)).Include("Category");
             }
             
             

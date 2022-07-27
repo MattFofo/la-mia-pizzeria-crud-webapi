@@ -113,4 +113,18 @@ html {
 }
 
 
-/* buttons */
+/* js containers */
+
+.js-container-popular {
+    height: 450px;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.js-container-index-home {
+    height: 600px;
+    overflow-y: scroll;
+}
