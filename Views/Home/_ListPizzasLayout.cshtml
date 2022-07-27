@@ -18,21 +18,24 @@
 
 <script type="text/javascript">
 
+    let searchDelay = null;
     const jsCont = document.getElementById("jsContainer");
+
     document.getElementById("search_pizza").addEventListener("keyup", searchPizza);
 
     loadList();
 
     function searchPizza(event) {
-        const value = document.getElementById("search_pizza").value;
-
-        loadList(value);
+        const searchValue = document.getElementById("search_pizza").value;
+        
+        if(searchDelay != null) clearTimeout(searchDelay);  
+        searchDelay = setTimeout(loadList, 350, searchValue);
+        
     }
 
 
-
     function loadList(search) {
-
+        globalTimeout = null;
         axios.get("/api/pizzas", {
             params: {
                 search:search
@@ -51,23 +54,23 @@
                 res.data.forEach(pizza => {
                 
                     jsCont.innerHTML += `
-                            <div class="card card-popular-section mb-3">
-                            <a href="Home/Details/${pizza.id}" class="text-decoration-none">
-                                <div class="row">
-                                    <div class="col">
-                                        <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
-                                    </div>
-                                    <div class="col">
-                                        <div class="card-body">
-                                            <h5 class="card-title">${pizza.name}</h5>
-                                            <div class="badge bg-info text-dark">${pizza.category.name}</div>
-                                            <p class="card-text">${pizza.description}</p>
-                                            <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
-                                        </div>
+                        <div class="card card-popular-section mb-3">
+                        <a href="Home/Details/${pizza.id}" class="text-decoration-none">
+                            <div class="row">
+                                <div class="col">
+                                    <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${pizza.name}</h5>
+                                        <div class="badge bg-info text-dark">${pizza.category.name}</div>
+                                        <p class="card-text">${pizza.description}</p>
+                                        <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
                                     </div>
                                 </div>
-                            </a>
                             </div>
+                        </a>
+                        </div>
                     `;
                 })
             }
