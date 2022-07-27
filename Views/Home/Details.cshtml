@@ -14,14 +14,18 @@
     axios.get("/api/pizzas/@Model").then(res => {
         console.log(res.data);
 
-        //let ingredients;
-        //res.data.ingredients.forEach(ingr => {
+        let HtmlIngredients = "";
+        res.data.ingredients.forEach(ingr => {
 
-        //})
+            let span = `<span class="badge bg-warning d-inline-block">${ingr.name}</span>`;
 
+            HtmlIngredients += span;
+
+        })
+
+        console.log(HtmlIngredients);
 
         jsContainer.innerHTML = `
-
         
         <div class="container py-5 d-flex justify-content-center h-main-body">
 
@@ -32,18 +36,14 @@
 
                         <h5 class="card-title fs-1 contrast-text text-center">${res.data.name}</h5>
                         <div class="badge bg-info text-dark">${res.data.category.name}</div>
+                        ${HtmlIngredients}
 
                         <p class="card-text fs-3">${res.data.description}</p>
                         <p class="card-text fs-3">${res.data.price} &euro;</p>
-
-                        <a class="btn btn-primary" href="Home" asp-controller="Pizza" asp-action="Index">Torna alla lista</a>
                     </div>
                 </div>
             </div>
         </div>
-        
-        
-        
         `
 
     }).catch(err => {
