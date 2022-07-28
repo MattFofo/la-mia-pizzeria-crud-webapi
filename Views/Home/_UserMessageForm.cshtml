@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
+﻿
 <div class="container py-4">
     <div class="col py-3">
         <h3>Qualcosa da dirci?</h3>
@@ -11,16 +6,16 @@
     <form class="p-4 form-user-message" method="post" onsubmit="event.preventDefault()">
         <div class="mb-3">
             <strong>Email</strong>
-            <input id="contact-email" class="d-block w-100" />
+            <input type="email" id="contact-email" class="d-block w-100" required />
             <span  class="text-danger"></span>
         </div>
         <div class="mb-3">
             <strong>Title</strong>
-            <input id="contact-title" class="d-block w-100" />
+            <input type="text" id="contact-title" class="d-block w-100" required />
         </div>
         <div class="mb-3">
             <strong>Text</strong>
-            <textarea type="text" rows="4" id="contact-text" class="d-block w-100"></textarea>
+            <textarea type="text" rows="4" id="contact-text" class="d-block w-100" required></textarea>
         </div>
         <div class="text-end">
             <button onclick="sendMessage()" class="btn btn-small btn-info">Invia</button>
@@ -40,7 +35,7 @@
         }).then(res => {
             console.log("ok", res);
             
-            if (res.data.Status == "ok") {
+            if (res.data.status == "ok") {
 
                 document.querySelector("#contact-email").value = "";
                 document.querySelector("#contact-title").value = "";
@@ -49,7 +44,7 @@
                 alert("Messaggio inviato correttamente!")
 
             } else {
-                alert("Errore: " + res.data.Message)
+                alert("Errore: " + res.data.message)
             }
 
         }).catch(err => {
