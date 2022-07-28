@@ -18,5 +18,11 @@ namespace la_mia_pizzeria.Models
         public string Text { get; set; }
 
 
+        public UserMessage(string email, string title, string text)
+        {
+            Email = email;
+            Title = title;
+            Text = text;
+        }
     }
 }

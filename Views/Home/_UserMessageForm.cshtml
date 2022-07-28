@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container py-4">
+    <div class="col py-3">
+        <h3>Qualcosa da dirci?</h3>
+    </div>
+    <form class="p-4 form-user-message" method="post" onsubmit="event.preventDefault()">
+        <div class="mb-3">
+            <strong>Email</strong>
+            <input id="contact-email" class="d-block w-100" />
+            <span  class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Title</strong>
+            <input id="contact-title" class="d-block w-100" />
+        </div>
+        <div class="mb-3">
+            <strong>Text</strong>
+            <textarea type="text" rows="4" id="contact-text" class="d-block w-100"></textarea>
+        </div>
+        <div class="text-end">
+            <button onclick="sendMessage()" class="btn btn-small btn-info">Invia</button>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+
+    function sendMessage(event){
+        axios.post("/api/UserMessages", {
+            Email: document.querySelector("#contact-email").value,
+            Title: document.querySelector("#contact-title").value,
+            Text: document.querySelector("#contact-text").value
+
+        }).then(res => {
+            console.log("ok", res);
+            
+            if (res.data.Status == "ok") {
+
+                document.querySelector("#contact-email").value = "";
+                document.querySelector("#contact-title").value = "";
+                document.querySelector("#contact-text").value = "";
+
+                alert("Messaggio inviato correttamente!")
+
+            } else {
+                alert("Errore: " + res.data.Message)
+            }
+
+        }).catch(err => {
+
+            console.log("ko", err); //TODO 
+        })
+
+    }
+
+</script>

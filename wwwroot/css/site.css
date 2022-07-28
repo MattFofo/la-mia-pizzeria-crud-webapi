@@ -100,7 +100,7 @@ html {
 }
 
 /* Form */
-.form-create, form-edit {
+.form-create, form-edit, .form-user-message {
     background-color: lightblue;
     box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
     border-radius: 20px;

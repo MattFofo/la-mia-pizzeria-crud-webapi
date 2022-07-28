@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using la_mia_pizzeria.DataBase;
+using la_mia_pizzeria.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,27 @@ namespace la_mia_pizzeria.Controllers.Api
     [ApiController]
     public class UserMessagesController : ControllerBase
     {
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] UserMessage message)
         {
+            try
+            {
+                PizzeriaContext ctx = new PizzeriaContext();
+
+                ctx.UserMessages.Add(message);
+                ctx.SaveChanges();
+
+                return Ok(new {Status = "ok", Message = "Dati inseriti correttamente"});
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new { Status = "ko", Message = "i dati inseriti non sono validi" });
+            }
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
