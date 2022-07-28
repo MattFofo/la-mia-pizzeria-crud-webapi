@@ -70,24 +70,24 @@ namespace la_mia_pizzeria.Controllers
             }
         }
 
-        // GET: UserMessageController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: UserMessageController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
+            if (!ModelState.IsValid) return NotFound();
+
+            using (PizzeriaContext context = new PizzeriaContext())
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                UserMessage message = context.UserMessages.Where(m => m.Id == id).FirstOrDefault();
+
+                if (message == null) return NotFound();
+
+                context.UserMessages.Remove(message);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
             }
         }
     }
