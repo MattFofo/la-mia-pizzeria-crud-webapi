@@ -1,0 +1,32 @@
+﻿@model List<UserMessage>
+
+
+
+@if (Model.Count == 0)
+{
+    <h2>Non ci sono messaggi</h2>
+}
+else
+{
+    <table class="table caption-top table-user-messages">
+        <thead>
+            <tr>
+                <td>Email</td>
+                <td>Title</td>
+                <td>Text</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (UserMessage message in Model)
+                {   
+                    <tr>
+                        <td>@message.Email</td>
+                        <td>@message.Title</td>
+                        <td>@message.Text</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}

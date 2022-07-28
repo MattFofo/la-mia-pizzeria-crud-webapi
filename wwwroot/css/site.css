@@ -84,7 +84,12 @@ html {
     min-height: 340px;
 }
 
-.table-pizza-list {
+/**************************************/
+
+
+/* tables */
+
+.table-pizza-list, .table-user-messages {
     background-color: ghostwhite;
 }
 
