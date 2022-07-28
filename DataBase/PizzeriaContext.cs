@@ -8,10 +8,9 @@ namespace la_mia_pizzeria.DataBase
     public class PizzeriaContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Pizza> Pizzas { get; set; }
-
         public DbSet<Category> Categories { get; set; }
-
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

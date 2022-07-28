@@ -55,21 +55,21 @@
                 
                     jsCont.innerHTML += `
                         <div class="card card-popular-section mb-3">
-                        <a href="Home/Details/${pizza.id}" class="text-decoration-none">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
-                                </div>
-                                <div class="col">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${pizza.name}</h5>
-                                        <div class="badge bg-info text-dark">${pizza.category.name}</div>
-                                        <p class="card-text">${pizza.description}</p>
-                                        <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
+                            <a href="Home/Details/${pizza.id}" class="text-decoration-none">
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="${pizza.image}" class="img-fluid rounded-start" alt="${pizza.name}">
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${pizza.name}</h5>
+                                            <div class="badge bg-info text-dark">${pizza.category.name}</div>
+                                            <p class="card-text">${pizza.description}</p>
+                                            <p class="card-text"><small class="text-muted">${pizza.price} &euro;</small></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
                         </div>
                     `;
                 })

@@ -14,7 +14,7 @@ namespace la_mia_pizzeria.Models
 
         [Column(TypeName = "text")]
         [Required(ErrorMessage = "Alla tua pizza serve una descrizione!")]
-        [StringLength(200, ErrorMessage = "Iltesto non può essere così lungo!")]
+        [StringLength(200, ErrorMessage = "Il testo non può essere così lungo!")]
         [NoMoreThanFiveWordsValidation]
         public string Description { get; set; }
 

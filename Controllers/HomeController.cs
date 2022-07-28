@@ -16,13 +16,10 @@ namespace la_mia_pizzeria.Controllers
 
         public IActionResult Index()
         {
-            using (PizzeriaContext context = new PizzeriaContext())
-            {
 
-                List<Pizza> listPizzas = context.Pizzas.ToList();
 
-                return View(listPizzas);
-            }
+            return View();
+            
         }
         public IActionResult Details(int id)
         {

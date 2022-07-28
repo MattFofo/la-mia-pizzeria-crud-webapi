@@ -13,9 +13,7 @@ html {
   min-height: 100%;
 }
 
-/*body {
-  margin-bottom: 60px;
-}*/
+/**************************************/
 
 /* utilities */
 .top-20 {
@@ -37,6 +35,8 @@ html {
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
 }
 
+/**************************************/
+
 /* main layout */
 
 .bg-main {
@@ -52,7 +52,7 @@ html {
     background-size: cover;
 }
 
-
+/**************************************/
 
 /* cards */
 
@@ -88,6 +88,7 @@ html {
     background-color: ghostwhite;
 }
 
+/**************************************/
 
 .translated-inner-card {
     padding: 2rem;
@@ -105,6 +106,7 @@ html {
     border-radius: 20px;
 }
 
+/**************************************/
 
 /* footer */
 
@@ -112,6 +114,7 @@ html {
     text-decoration: none;
 }
 
+/**************************************/
 
 /* js containers */
 
@@ -128,3 +131,5 @@ html {
     height: 600px;
     overflow-y: scroll;
 }
+
+/**************************************/

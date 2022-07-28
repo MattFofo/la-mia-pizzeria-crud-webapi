@@ -36,9 +36,7 @@
                             }
                             <p class="card-text">@pizza.Description</p>
                             <p class="card-text"><small class="text-muted">@pizza.Price &euro;</small></p>
-                            <a class="btn btn-info" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
-                                Dettagli
-                            </a>
+
                             @if (User.Identity.IsAuthenticated)
                             {                                  
                                 <a class="btn btn-info" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
@@ -55,6 +53,11 @@
                                         <i class="fa-solid fa-trash-can-arrow-up"></i>
                                     </button>
                                 }
+                            }else
+                            {
+                                <a class="btn btn-info" asp-controller="Pizza" asp-action="Details" asp-route-id="@pizza.Id">
+                                    Dettagli
+                                </a>
                             }
                         </div>
                     </div>
