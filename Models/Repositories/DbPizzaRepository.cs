@@ -1,10 +1,11 @@
 ﻿using la_mia_pizzeria.DataBase;
+using la_mia_pizzeria.Models.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria.Models.Repositories
 {
-    public class DbPizzaRepository
+    public class DbPizzaRepository : IPizzaRepository
     {
         private readonly PizzeriaContext _context;
 
@@ -39,7 +40,7 @@ namespace la_mia_pizzeria.Models.Repositories
             List<Pizza> listPizzas = _context.Pizzas.Include(p => p.Category).Include(p => p.Ingredients).ToList();
 
             return listPizzas;
-            
+
         }
 
 
@@ -97,7 +98,7 @@ namespace la_mia_pizzeria.Models.Repositories
 
             _context.Pizzas.Add(newPizza);
             _context.SaveChanges();
-            
+
         }
 
         public PizzaPivotCrud Update(int id)
@@ -122,7 +123,7 @@ namespace la_mia_pizzeria.Models.Repositories
             }
 
             return model;
-            
+
         }
 
 
@@ -154,7 +155,7 @@ namespace la_mia_pizzeria.Models.Repositories
 
             _context.Update(pizzaToEdit);
             _context.SaveChanges();
-            
+
         }
 
 
@@ -164,7 +165,7 @@ namespace la_mia_pizzeria.Models.Repositories
 
             _context.Pizzas.Remove(pizza);
             _context.SaveChanges();
- 
-        }   
+
+        }
     }
 }
