@@ -40,7 +40,16 @@
                         <td class="w-25"><img class="img-thumbnail w-50 h-50" src="@pizza.Image" onerror="this.src ='https://picsum.photos/200'"/></td>
                         <td>@pizza.Description</td>
                         <td style="width: 100px;">@pizza.Price &euro;</td>
-                        <td><span class="badge bg-info text-dark">@pizza.Category.Name</span></td>
+                        @if (@pizza.Category != null)
+                        {
+                            <td><span class="badge bg-info text-dark">@pizza.Category.Name</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge bg-info text-dark">nessuna categoria</span></td>
+                            
+                        }
+
 
                         @if (User.Identity.IsAuthenticated)
                         {

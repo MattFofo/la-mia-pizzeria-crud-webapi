@@ -14,7 +14,7 @@ builder.Services.AddDbContext<PizzeriaContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<PizzeriaContext>();
 
-builder.Services.AddScoped<IPizzaRepository, InMemoryPizzaRepository>();
+builder.Services.AddScoped<IPizzaRepository, DbPizzaRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddJsonOptions(x =>
