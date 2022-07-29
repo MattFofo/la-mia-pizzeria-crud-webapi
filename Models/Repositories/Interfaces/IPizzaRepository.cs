@@ -13,7 +13,7 @@ namespace la_mia_pizzeria.Models.Repositories.Interfaces
         PizzaPivotCrud Update(int id);
         void Update(int id, PizzaPivotCrud model);
 
-        static List<SelectListItem> GetIngredientsList()
+        static List<SelectListItem> GetIngredientsList() //TODO
         {
             var list = new List<SelectListItem>();
             return list;

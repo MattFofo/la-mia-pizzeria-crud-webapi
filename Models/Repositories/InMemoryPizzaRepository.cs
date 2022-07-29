@@ -27,12 +27,16 @@ namespace la_mia_pizzeria.Models.Repositories
         {
             Pizza pizza1 = new Pizza("Margherita", "Molto buona", "https://picsum.photos/200", 8.50m)
             {
+                Id = Pizzas.Count,
+
                 Category = new Category() { Name = "Pizze bianche" },
 
                 Ingredients = new List<Ingredient> { new Ingredient() { Name = "mozzarella"}, new Ingredient() { Name = "pomodoro" } }  
             };
             Pizza pizza2 = new Pizza("Prosciutto", "Ancora più buona", "https://picsum.photos/200", 9.50m)
             {
+                Id = Pizzas.Count + 1,
+
                 Category = new Category() { Name = "Pizze speciali" },
 
                 Ingredients = new List<Ingredient> { new Ingredient() { Name = "prosciutto" }, new Ingredient() { Name = "pomodoro" } }
@@ -62,7 +66,16 @@ namespace la_mia_pizzeria.Models.Repositories
 
         public PizzaPivotCrud Create()
         {
-            throw new NotImplementedException();
+            List<Category> categories = Categories;
+
+            PizzaPivotCrud pizzaPivotCrud = new PizzaPivotCrud();
+
+            pizzaPivotCrud.Categories = categories;
+            pizzaPivotCrud.Pizza = new Pizza();
+
+            pizzaPivotCrud.Ingredients = GetIngredientsList();
+
+            return pizzaPivotCrud;
         }
 
         public void Create(PizzaPivotCrud formData)
@@ -74,6 +87,7 @@ namespace la_mia_pizzeria.Models.Repositories
             newPizza.Price = formData.Pizza.Price;
             newPizza.Category = formData.Pizza.Category;
             newPizza.CategoryId = formData.Pizza.CategoryId;
+            newPizza.Id = Pizzas.Count;
 
             newPizza.Ingredients = new List<Ingredient>();
 
@@ -105,7 +119,7 @@ namespace la_mia_pizzeria.Models.Repositories
 
         public Pizza GetById(int id)
         {
-            Pizza pizza = Pizzas.Find(p => p.Id == id);
+            Pizza pizza = Pizzas.Where(p => p.Id == id).FirstOrDefault();
 
             return pizza;
             
