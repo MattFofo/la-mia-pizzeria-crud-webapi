@@ -154,7 +154,7 @@ namespace la_mia_pizzeria.Models.Repositories
             pizzaToEdit.Description = model.Pizza.Description;
             pizzaToEdit.Image = model.Pizza.Image;
             pizzaToEdit.Price = model.Pizza.Price;
-            pizzaToEdit.Category = model.Pizza.Category;
+            pizzaToEdit.Category = model.Pizza.Category; //TODO: il model non passa la categoria
             pizzaToEdit.CategoryId = model.Pizza.CategoryId;
 
             pizzaToEdit.Ingredients.Clear();
