@@ -103,7 +103,7 @@ namespace la_mia_pizzeria.Models.Repositories
         public PizzaPivotCrud Update(int id)
         {
 
-            Pizza pizza = _context.Pizzas.Where(pizza => pizza.Id == id).Include(p => p.Category).Include(p => p.Ingredients).FirstOrDefault();
+            Pizza pizza = GetById(id);
 
             List<Category> categories = _context.Categories.ToList();
 

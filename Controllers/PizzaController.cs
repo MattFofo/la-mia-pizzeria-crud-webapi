@@ -59,9 +59,9 @@ namespace la_mia_pizzeria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PizzaPivotCrud formData)
         {
-            using (PizzeriaContext context = new PizzeriaContext())
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
+                using (PizzeriaContext context = new PizzeriaContext())
                 {
                     PizzaPivotCrud model = new PizzaPivotCrud();
 
@@ -71,41 +71,26 @@ namespace la_mia_pizzeria.Controllers
 
                     return View(model);
                 }
-
-                DbPizzaRepository.Create(formData);
-
-                return RedirectToAction(nameof(Index));
-
             }
+
+            DbPizzaRepository.Create(formData);
+
+            return RedirectToAction(nameof(Index));
+
+           
         }
 
         [Authorize]
         public ActionResult Edit(int id)
         {
-            using (PizzeriaContext context = new PizzeriaContext())
-            {
-                Pizza pizza = DbPizzaRepository.GetById(id);
 
-                if (pizza == null) return NotFound();
+            Pizza pizza = DbPizzaRepository.GetById(id);
 
-                List<Category> categories = context.Categories.ToList();
+            if (pizza == null) return NotFound();
 
-                PizzaPivotCrud model = new PizzaPivotCrud();
-                model.Pizza = pizza;
-                model.Categories = categories;
-                model.Ingredients = GetIngredientsList();
-                model.SelectedIngredients = new List<string>();
+            PizzaPivotCrud model = DbPizzaRepository.Update(id);
 
-                if (pizza.Ingredients != null)
-                {
-                    foreach (Ingredient ingredient in pizza.Ingredients)
-                    {
-                        model.SelectedIngredients.Add(ingredient.Id.ToString());
-                    }
-                }
-
-                return View(model);
-            }
+            return View(model);
 
         }
 
@@ -127,7 +112,6 @@ namespace la_mia_pizzeria.Controllers
                 }
             }
 
-            //Pizza pizzaToEdit = context.Pizzas.Where(p => p.Id == id).Include(p => p.Ingredients).FirstOrDefault();
             Pizza pizzaToEdit = DbPizzaRepository.GetById(id);
 
             if (pizzaToEdit == null) return NotFound();
@@ -137,6 +121,7 @@ namespace la_mia_pizzeria.Controllers
             return RedirectToAction("Index");
 
         }
+
 
         [Authorize]
         [HttpPost]
@@ -155,11 +140,11 @@ namespace la_mia_pizzeria.Controllers
             return RedirectToAction("Index");
         }
 
+
         private static List<SelectListItem> GetIngredientsList()
         {
 
             List<SelectListItem> ingredientsList = DbPizzaRepository.GetIngredientsList();
-
 
             return ingredientsList;
         }
