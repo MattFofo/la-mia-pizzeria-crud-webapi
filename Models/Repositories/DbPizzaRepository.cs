@@ -43,6 +43,14 @@ namespace la_mia_pizzeria.Models.Repositories
 
         }
 
+        public List<Pizza> GetListByFilter(string search)
+        {
+
+            List<Pizza> pizzasList = _context.Pizzas.Where(p => p.Name.Contains(search)).Include("Category").ToList();
+
+            return pizzasList;
+        }
+
 
         public Pizza GetById(int id)
         {

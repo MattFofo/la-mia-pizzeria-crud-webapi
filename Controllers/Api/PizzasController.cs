@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria.DataBase;
 using la_mia_pizzeria.Models;
+using la_mia_pizzeria.Models.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,21 +11,23 @@ namespace la_mia_pizzeria.Controllers.Api
     [ApiController]
     public class PizzasController : ControllerBase
     {
+        private DbPizzaRepository DbPizzaRepository;
+
+        public PizzasController(DbPizzaRepository dbPizzaRepository)
+        {
+            DbPizzaRepository = dbPizzaRepository;
+        }
 
         public ActionResult Get(string? search)
         {
 
-            PizzeriaContext ctx = new PizzeriaContext();
-
-            IQueryable<Pizza> pizzasList = ctx.Pizzas.Include("Category");
+            List<Pizza> pizzasList = DbPizzaRepository.GetList();
 
             if(search != null && search != "")
             {
-                pizzasList = ctx.Pizzas.Where(p => p.Name.Contains(search)).Include("Category");
+                pizzasList = DbPizzaRepository.GetListByFilter(search);
             }
             
-            
-
             return Ok(pizzasList.ToList());
   
         }
@@ -33,9 +36,7 @@ namespace la_mia_pizzeria.Controllers.Api
         public ActionResult Get(int id)
         {
 
-            PizzeriaContext ctx = new PizzeriaContext();
-
-            Pizza pizza = ctx.Pizzas.Where(p => p.Id == id).Include("Category").Include("Ingredients").FirstOrDefault();
+            Pizza pizza = DbPizzaRepository.GetById(id);
 
             if(pizza == null) return NotFound();
 

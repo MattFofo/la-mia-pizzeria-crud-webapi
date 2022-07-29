@@ -7,6 +7,7 @@
         void Delete(int id);
         Pizza GetById(int id);
         List<Pizza> GetList();
+        List<Pizza> GetListByFilter(string search);
         PizzaPivotCrud Update(int id);
         void Update(int id, PizzaPivotCrud model);
     }
