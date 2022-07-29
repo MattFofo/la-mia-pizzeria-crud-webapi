@@ -1,4 +1,6 @@
-﻿namespace la_mia_pizzeria.Models.Repositories.Interfaces
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace la_mia_pizzeria.Models.Repositories.Interfaces
 {
     public interface IPizzaRepository
     {
@@ -10,5 +12,11 @@
         List<Pizza> GetListByFilter(string search);
         PizzaPivotCrud Update(int id);
         void Update(int id, PizzaPivotCrud model);
+
+        static List<SelectListItem> GetIngredientsList()
+        {
+            var list = new List<SelectListItem>();
+            return list;
+        }
     }
 }

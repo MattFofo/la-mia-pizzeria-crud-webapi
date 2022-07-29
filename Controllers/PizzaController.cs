@@ -1,6 +1,7 @@
 ﻿using la_mia_pizzeria.DataBase;
 using la_mia_pizzeria.Models;
 using la_mia_pizzeria.Models.Repositories;
+using la_mia_pizzeria.Models.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,11 @@ namespace la_mia_pizzeria.Controllers
     
     public class PizzaController : Controller
     {
-        private DbPizzaRepository DbPizzaRepository { get; set; }
+        private IPizzaRepository PizzaRepository;
 
-        public PizzaController(DbPizzaRepository dbPostRepository)
+        public PizzaController(IPizzaRepository dbPostRepository)
         {
-            DbPizzaRepository = dbPostRepository;
+            PizzaRepository = dbPostRepository;
         }
 
 
@@ -25,7 +26,7 @@ namespace la_mia_pizzeria.Controllers
         public ActionResult Index()
         {
 
-            List<Pizza> listPizzas = DbPizzaRepository.GetList();
+            List<Pizza> listPizzas = PizzaRepository.GetList();
 
             return View(listPizzas);
             
@@ -35,7 +36,7 @@ namespace la_mia_pizzeria.Controllers
         public ActionResult Details(int id)
         {
             
-            Pizza pizza = DbPizzaRepository.GetById(id);
+            Pizza pizza = PizzaRepository.GetById(id);
 
             if(pizza == null) return NotFound();
 
@@ -46,7 +47,7 @@ namespace la_mia_pizzeria.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            PizzaPivotCrud pizzaPivotCrud = DbPizzaRepository.Create();
+            PizzaPivotCrud pizzaPivotCrud = PizzaRepository.Create();
 
             return View(pizzaPivotCrud);
             
@@ -73,7 +74,7 @@ namespace la_mia_pizzeria.Controllers
                 }
             }
 
-            DbPizzaRepository.Create(formData);
+            PizzaRepository.Create(formData);
 
             return RedirectToAction(nameof(Index));
 
@@ -84,11 +85,11 @@ namespace la_mia_pizzeria.Controllers
         public ActionResult Edit(int id)
         {
 
-            Pizza pizza = DbPizzaRepository.GetById(id);
+            Pizza pizza = PizzaRepository.GetById(id);
 
             if (pizza == null) return NotFound();
 
-            PizzaPivotCrud model = DbPizzaRepository.Update(id);
+            PizzaPivotCrud model = PizzaRepository.Update(id);
 
             return View(model);
 
@@ -112,11 +113,11 @@ namespace la_mia_pizzeria.Controllers
                 }
             }
 
-            Pizza pizzaToEdit = DbPizzaRepository.GetById(id);
+            Pizza pizzaToEdit = PizzaRepository.GetById(id);
 
             if (pizzaToEdit == null) return NotFound();
 
-            DbPizzaRepository.Update(id, model);
+            PizzaRepository.Update(id, model);
 
             return RedirectToAction("Index");
 
@@ -131,11 +132,11 @@ namespace la_mia_pizzeria.Controllers
             if (!ModelState.IsValid) return NotFound();
 
 
-            Pizza pizza = DbPizzaRepository.GetById(id);
+            Pizza pizza = PizzaRepository.GetById(id);
 
             if (pizza == null) return NotFound();
 
-            DbPizzaRepository.Delete(id);
+            PizzaRepository.Delete(id);
 
             return RedirectToAction("Index");
         }
@@ -144,7 +145,7 @@ namespace la_mia_pizzeria.Controllers
         private static List<SelectListItem> GetIngredientsList()
         {
 
-            List<SelectListItem> ingredientsList = DbPizzaRepository.GetIngredientsList();
+            List<SelectListItem> ingredientsList = IPizzaRepository.GetIngredientsList();
 
             return ingredientsList;
         }

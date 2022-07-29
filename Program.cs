@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using la_mia_pizzeria.DataBase;
 using System.Text.Json.Serialization;
 using la_mia_pizzeria.Models.Repositories;
+using la_mia_pizzeria.Models.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("PizzeriaContextConnection") ?? throw new InvalidOperationException("Connection string 'PizzeriaContextConnection' not found.");
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<PizzeriaContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<PizzeriaContext>();
 
-builder.Services.AddScoped<DbPizzaRepository>();
+builder.Services.AddScoped<IPizzaRepository, InMemoryPizzaRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddJsonOptions(x =>
